@@ -4,7 +4,7 @@
 
 # Site
 title: Hingsir's Notes
-subtitle: 尘世中一个小码农 @低端工程师
+subtitle: '@ReferenceError:  signature is not defined'
 description:
 author: hingsir
 language: zh-tw
@@ -70,4 +70,6 @@ theme: hexo-theme-next
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  repository: https://github.com/hingsir/hingsir.githu.io.git
+  branch: master
