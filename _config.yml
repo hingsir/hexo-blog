@@ -71,5 +71,5 @@ theme: hexo-theme-next
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/hingsir/hingsir.githu.io.git
+  repository: https://github.com/hingsir/hingsir.github.io.git
   branch: master
