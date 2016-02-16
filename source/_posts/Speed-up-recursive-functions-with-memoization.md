@@ -1,36 +1,53 @@
 title: Speed up recursive functions with memoization
-date: 2016-01-25 10:10:17
+date: 2016-02-01 10:10:17
 tags:
  - JavaScript
 categories:
  - 技术杂谈
 ---
 
+被 [jstips](https://github.com/loverajoel/jstips/blob/gh-pages/_posts/en/2016-01-29-speed-up-recursive-functions-with-memoization.md) 收录了，o(∩_∩)o
+
 Fibonacci sequence is very familiar to everybody. we can write the following function in 20 seconds.
+
 ```js
 var fibonacci = function(n){
-    return n <= 1 ? n : fibonacci(n-1) + fibonacci(n-2);
+    return n < 2 ? n : fibonacci(n-1) + fibonacci(n-2);
 }
 ```
 it works, but not efficient. it did lots of duplicate computing works, we can cache its previously computed results to speed it up.
+
 ```js
 var fibonacci = (function(){
     var cache = {
         0: 0,
         1: 1
     };
-    return function(n){
-        return n <= 1 ? cache[n] : (cache[n] = cache[n-1] + cache[n-2]);
+    return function self(n){
+        return n in cache ? cache[n] : (cache[n] = self(n-1) + self(n-2));
     }
 })()
 ```
 Also, we can define a higher-order function that accepts a function as its argument and returns a memoized version of the function.
+
 ```js
 var memoize = function(func){
     var cache = {};
     return function(){
         var key = Array.prototype.slice.call(arguments).toString();
         return key in cache ? cache[key] : (cache[key] = func.apply(this,arguments));
+    }
+}
+fibonacci = memoize(fibonacci);
+```
+And there is a ES6 version of the memoize function.
+
+```js
+var memoize = function(func){
+    const cache = {};
+    return (...args) => {
+        const key = [...args].toString();
+        return key in cache ? cache[key] : (cache[key] = func(...args));
     }
 }
 fibonacci = memoize(fibonacci);
