@@ -1,2 +1,2 @@
 # hexo-blog
-Generator of [hingsir.github.io](http://hingsir.github.io)
+Generator of [blog.hingsir.com](http://blog.hingsir.com)
